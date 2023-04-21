@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png" />
+    <!-- styles -->
+    <link rel="stylesheet" type="text/css" href="./styles/styles.post.css" />
+    <!-- JQuery -->
+    <script defer src="./libs/jquery/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="./libs/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <!-- scripts -->
+    <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/script.js"></script>
+  </head>
+
+  <body>
+    <div id="view">
+      <div id="-container-top">
+        <div id="-wrapper-top-left">
+          <div id="-container-top-left">
+            <div id="-container-select-domains">
+              <a id="-text-generation-parameters">Parameters: </a>
+              <select name="domain-selector" id="-select-domains">
+                <option disabled>Options</option>
+                <option value="0" selected>Lorem ipsum</option>
+                <option value="1">Dolor sit amet</option>
+                <option value="2">Consectetuer adipiscing elit</option>
+                <option value="3">Aenean commodo ligula</option>
+              </select>
+            </div>
+            <div id="-container-six-digit-codes">
+              <input type="checkbox" id="-checkbox-six-digit-codes" checked />
+              <a id="-text-six-digit-codes" onclick="toggleCheckbox(this);">Cum sociis natoque penatibus</a>
+            </div>
+            <div id="-container-stay-on-the-same-tab">
+              <input type="checkbox" id="-checkbox-stay-on-the-same-tab" />
+              <a id="-text-stay-on-the-same-tab" onclick="toggleCheckbox(this)">Magnis dis parturient montes</a>
+            </div>
+            <div id="-container-link-autosave">
+              <input type="checkbox" id="-checkbox-link-autosave" />
+              <a id="-text-link-autosave" onclick="toggleCheckbox(this)">Nascetur ridiculus mus</a>
+            </div>
+          </div>
+        </div>
+        <div id="-container-top-right">
+          <div id="-container-darktheme-toggle">
+            <input type="checkbox" id="-checkbox-darktheme-toggle" onchange="onCheckboxDarkThemeToggle(this)" />
+            <a id="-text-darktheme-toggle" onclick="toggleCheckbox(this)">Dark theme</a>
+          </div>
+        </div>
+      </div>
+      <div id="-container-center">
+        <div id="-container-title">
+          <a id="-text-title">Hello World</a>
+        </div>
+        <div id="-container-generate">
+          <input type="button" id="-button-generate" class="btn btn-primary" onclick="Open()" value="Action" />
+        </div>
+        <div id="-container-generating-link">
+          <a id="-text-generating-link">&nbsp;Loading...&nbsp;</a>
+        </div>
+      </div>
+    </div>
+    <div id="-container-bottom">
+      <div id="-container-bottom-updates">
+        <a id="-text-updates" style="text-decoration: none"><img src="./assets/logo-telegram.png" />&nbsp;Updates: </a>
+        <a id="-href-updates" href="#" style="text-decoration: none; font-weight: bold">t.me/telegram</a>
+      </div>
+      <a id="-text-support"><img src="./assets/icon-favicon.jpg" />&nbsp;Contact: <wbr /><span style="user-select: text">example@address.com</span></a>
+      <div>
+        <a id="-href-bmac" href="#" style="text-decoration: none; font-weight: bold"><img src="./assets/logo-bmac.svg" />&nbsp;Buy Me a Coffee</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function toggleCheckbox(e) {
+        $(`#${e.id.replace("-text-", "-checkbox-")}`).trigger("click")
+      }
+    </script>
+  </body>
+</html>

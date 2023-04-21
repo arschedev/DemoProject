@@ -1,0 +1,21 @@
+{
+  "name": "demo",
+  "version": "0.0.0",
+  "description": "Demo",
+  "scripts": {
+    "sass": "sass --watch --no-source-map styles/styles.scss styles/styles.css",
+    "postcss": "npx postcss styles/styles.css -o styles/styles.post.css --use autoprefixer --watch",
+    "check": "npx prettier --check .",
+    "pretty": "npx prettier --write ."
+  },
+  "author": "arschedev",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.17.0",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^9.1.0",
+    "prettier": "^2.8.7",
+    "sass": "^1.52.3"
+  }
+}

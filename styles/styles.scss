@@ -1,0 +1,334 @@
+// Imports
+@use "sass:string";
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+@import "./res/transitions.css";
+
+// Variables
+//
+$i: string.unquote("!important");
+// -screens
+$screen-mobile: 768px;
+$screen-low-height: 665px;
+$screen-lowest-height: 418px;
+$screen-wide-ratio: "21/9";
+$screen-wide-width: 1920px;
+$screen-lowest-width: 342px;
+// -colors
+// --light
+$container-bg-color: #000;
+$container-border-color: #000;
+$container-font-color: #fff;
+// --dark
+$primary: #1c1b22;
+$dark-container-bg-color: #e0e0e0;
+$dark-container-border-color: #e0e0e0;
+$dark-container-font-color: #000;
+
+// Mixins
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin normalize($justify: false) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  @if $justify {
+    justify-content: center;
+  }
+}
+
+@mixin box-shadow($radius: 8px) {
+  box-shadow: 0 0 $radius $container-bg-color;
+}
+
+@mixin box-shadow-dark($radius: 3px) {
+  box-shadow: 0 0 $radius $dark-container-border-color $i;
+}
+
+//!                                                           ===General===
+
+* {
+  user-select: none;
+  position: relative;
+  font-family: "Source Code Pro", monospace $i;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+
+  @media screen and (max-width: $screen-mobile) {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+#-text-six-digit-codes,
+#-text-stay-on-the-same-tab,
+#-text-link-autosave,
+#-text-darktheme-toggle {
+  cursor: pointer;
+}
+
+body {
+  background-image: url("../assets/img-background.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+
+  #view {
+    height: 100vh;
+
+    @media screen and (max-height: $screen-lowest-height) {
+      height: 100%;
+    }
+  }
+
+  &.bg-to-dark {
+    @media screen and (max-height: $screen-lowest-height) {
+      background-image: none $i;
+      background-color: $primary $i;
+    }
+  }
+}
+
+//!                                                           ===Top===
+
+#-container-top {
+  padding: 1.5vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 1.2vh;
+}
+
+//!                                                           ===Left===
+
+#-container-top-left {
+  @include box-shadow;
+  display: flex;
+  flex-direction: column;
+  border: 8px solid $container-border-color;
+  border-radius: 14px;
+  background: $container-bg-color;
+  color: $container-font-color;
+
+  #-container-select-domains {
+    flex-direction: column;
+    align-items: flex-start;
+
+    select {
+      width: 100%;
+    }
+  }
+
+  div {
+    @include normalize;
+    margin: 3px;
+  }
+
+  @media screen and (max-height: $screen-lowest-height) {
+    height: 100%;
+    $height: 94%;
+
+    * {
+      height: $height - 0;
+      font-size: $height - 2;
+    }
+  }
+}
+
+//!                                                           ===Right===
+
+#-container-darktheme-toggle {
+  @include box-shadow;
+  @include normalize($justify: true);
+  padding: 5px;
+  width: 148px;
+  height: 39px;
+  border: 4px solid $container-border-color;
+  border-radius: 16px;
+  background: $container-bg-color;
+  color: $container-font-color;
+}
+
+//!                                                           ===Center===
+
+#-container-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  *:not(#-button-generate) {
+    margin: 10px;
+  }
+
+  // higher than low height
+  @media screen and (min-height: $screen-low-height) {
+    @include center;
+
+    #-button-generate {
+      margin: 10px;
+    }
+  }
+
+  // lower than low height
+  @media screen and (max-height: $screen-low-height) {
+    margin-top: 8px;
+    position: relative;
+
+    #-button-generate {
+      border-radius: 20px;
+    }
+  }
+
+  // lower than lowest width
+  @media screen and (max-width: $screen-lowest-width) {
+    margin-top: 10vmax;
+  }
+}
+
+#-container-title {
+  @include box-shadow(5px);
+  border: 4px solid $container-border-color;
+  border-radius: 14px;
+  height: 45px;
+  background: $container-bg-color;
+  color: $container-font-color;
+
+  #-text-title {
+    font-size: 24px;
+  }
+}
+
+#-button-generate {
+  @include box-shadow();
+  width: 60vw;
+  border-radius: 20px;
+  height: 46px;
+  font-size: 16px;
+
+  @media screen and (max-width: $screen-mobile) {
+    width: 80vw;
+    border-radius: 30px;
+  }
+
+  @media screen and (min-aspect-ratio: $screen-wide-ratio) and (min-width: $screen-wide-width) {
+    width: 922px;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5) $i;
+  }
+}
+
+#-container-generating-link {
+  text-align: center;
+  visibility: hidden;
+  background: $container-bg-color;
+  color: orange;
+  border: 6px solid $container-border-color;
+  border-radius: 14px $i;
+
+  &:hover {
+    background-color: $primary;
+    border-color: $primary;
+    cursor: pointer $i;
+    transition: background-color var(--t-in-short), border-color var(--t-in-short);
+  }
+
+  transition: background-color var(--t-in-long), border-color var(--t-in-long);
+}
+
+//!                                                           ===Bottom===
+
+#-container-bottom {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5vw;
+  background: $container-bg-color;
+  color: $container-font-color;
+
+  @media screen and (max-height: $screen-lowest-height) {
+    margin-top: 10vmax;
+  }
+
+  &:hover {
+    img {
+      filter: grayscale(15%);
+      transition: filter var(--t-in-long);
+    }
+  }
+}
+
+img {
+  top: -2px;
+  width: 15px;
+  filter: grayscale(80%);
+  transition: filter var(--t-out-medium);
+}
+
+#-href-bmac > img {
+  width: 16px $i;
+}
+
+#-text-support > img {
+  border: 1px dashed #fff;
+}
+
+.container-to-dark #-text-support > img {
+  border-style: solid $i;
+  border-color: #ec2854 $i;
+}
+
+//!                                                           ===Dark===
+
+.bg-to-dark {
+  background-color: $primary $i;
+  transition: background-color var(--t-in-long) $i;
+}
+
+.container-to-dark {
+  background-color: $dark-container-bg-color $i;
+  color: $dark-container-font-color $i;
+  transition: background-color var(--t-in-long), color var(--t-in-long) $i;
+}
+
+.el-to-dark {
+  // @include box-shadow-dark;
+
+  &#-container-title {
+    @include box-shadow-dark(2px);
+  }
+
+  background-color: $dark-container-bg-color $i;
+  border-color: $dark-container-border-color $i;
+  color: $dark-container-font-color $i;
+  transition: background-color var(--t-in-long), border-color var(--t-in-long), color var(--t-in-long), box-shadow var(--t-in-long) $i;
+}
+
+.some-to-dark {
+  background-color: $primary $i;
+  border-color: $primary $i;
+
+  &#-container-generating-link:hover {
+    background-color: #000 $i;
+    border-color: #000 $i;
+    transition: background-color var(--t-in-short), border-color var(--t-in-short) $i;
+  }
+
+  transition: background-color var(--t-in-long), border-color var(--t-in-long);
+}
+
+.button-to-dark {
+  box-shadow: none $i;
+}
